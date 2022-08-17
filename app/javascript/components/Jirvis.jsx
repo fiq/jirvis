@@ -22,7 +22,7 @@ const Jirvis = () => {
         const capturedWords = event.results[indexOfCurrentCapture];
         setCapture( capturedWords[0].transcript );
         console.log("In recognition");
-        console.log("Got " + capturedWords[0]);
+        console.log("Got " + capturedWords[0].transcript);
     };
 
     const startRecognition = () => {
