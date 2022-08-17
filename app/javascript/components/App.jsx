@@ -1,5 +1,5 @@
 import React from "react";
-
-const App = () => <div>I am Jarvis</div>
+import Jirvis from "./Jirvis"
+const App = () => <Jirvis />
 
 export default App;
