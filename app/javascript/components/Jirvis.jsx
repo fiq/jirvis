@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Jirvis = () => {
-    let capture = ""
-    let captureIndex = 0;
+    const [capture, setCapture] = useState("<<No words detected>>");
     const SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
     const SpeechGrammarList = window.SpeechGrammarList || webkitSpeechGrammarList;
     const SpeechRecognitionEvent = window.SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
@@ -18,14 +17,15 @@ const Jirvis = () => {
     recognition.maxAlternatives = 1;
 
     const showSpeech = (event) => {
-        capture = event.results[captureIndex][0].transcript;
+        event.preventDefault();
+        const indexOfCurrentCapture = event.results.length - 1;
+        const capturedWords = event.results[indexOfCurrentCapture];
+        setCapture( capturedWords[0].transcript );
         console.log("In recognition");
-        console.log("Got " + capture);
-        captureIndex++;
+        console.log("Got " + capturedWords[0]);
     };
 
     const startRecognition = () => {
-        captureIndex = 0;
         recognition.start();
         recognition.onresult = showSpeech
     };
@@ -35,8 +35,7 @@ const Jirvis = () => {
             Please provided a command from {commands.join(", ")}
             <button onClick={startRecognition}>Capture Speech</button>
             <br />
-            <div>{capture}
-            </div>
+            <div>{capture}</div>
         </div>
 
     )
