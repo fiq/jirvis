@@ -1,0 +1,17 @@
+.container {
+    align-content: space-around;
+}
+
+body {
+    background-image: url("stark.jpg");
+    background-color: #222222;
+}
+
+img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 90%;
+    margin: 20px auto;
+  }

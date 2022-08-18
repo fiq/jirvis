@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import WordCapture from "./WordCapture";
+//import MicIcon from '@mui/icons-material/Mic';
+
 
 const Jirvis = () => {
     const [capture, setCapture] = useState("<<No words detected>>");
@@ -31,13 +36,20 @@ const Jirvis = () => {
     };
 
     return (
-        <div>
-            Please provided a command from {commands.join(", ")}
-            <button onClick={startRecognition}>Capture Speech</button>
+        <Box sx={{
+            width: 300,
+            height: 300,
+            backgroundColor: 'primary.dark',
+            '&:hover': {
+              backgroundColor: 'primary.main',
+              opacity: [0.9, 0.8, 0.7],
+            },
+          }}>
+            <b>Please provided a command from {commands.join(", ")}</b>
+            <Button variant="contained" onClick={startRecognition}>Capture Speech</Button>
             <br />
-            <div>{capture}</div>
-        </div>
-
+            <WordCapture word={capture}/>
+        </Box>
     )
 }
 
