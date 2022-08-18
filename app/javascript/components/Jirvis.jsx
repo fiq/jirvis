@@ -5,6 +5,7 @@ import WordCapture from "./WordCapture";
 import { Grid } from "@mui/material";
 //import MicIcon from '@mui/icons-material/Mic';
 import Project from "./Project"
+import Standup from "./Standup"
 
 
 const Jirvis = (props) => {
@@ -24,12 +25,15 @@ const Jirvis = (props) => {
     recognition.maxAlternatives = 1;
 
     const showSpeech = (event) => {
-        event.preventDefault();
+        //event.preventDefault();
         const indexOfCurrentCapture = event.results.length - 1;
         const capturedWords = event.results[indexOfCurrentCapture];
-        setCapture(capturedWords[0].transcript);
+        const capture = capturedWords[0].transcript
+        setCapture(capture);
         console.log("In recognition");
-        console.log("Got " + capturedWords[0].transcript);
+        console.log("Got " + capture);
+        const synth = window.speechSynthesis;
+        synth.speak(new SpeechSynthesisUtterance("I heard you say: " + capture ));
     };
 
     const startRecognition = () => {
@@ -56,6 +60,7 @@ const Jirvis = (props) => {
             </Grid>
             <Grid>
                 <WordCapture word={capture} />
+                <Standup projectId={props.projectId}/>
             </Grid>
             <Grid>
                 <Project projectId={props.projectId} />

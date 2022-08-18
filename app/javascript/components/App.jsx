@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid2 from '@mui/material/Unstable_Grid2'; // Grid version 2
 import Jirvis from "./Jirvis";
 import { Button, Grid } from "@mui/material";
@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 
-
+const greeting = "Welcome to Jirvis. Let's continuously deliver heroics.";
 
 const darkTheme = createTheme({
     palette: {
@@ -15,14 +15,33 @@ const darkTheme = createTheme({
     },
 });
 
+
 const App = () => {
-    const [project, setProject] = useState("WCA");
+    const synth = window.speechSynthesis;
+    const [project, setProject] = useState("AV");
     const updateProject = (e) => {
-        //e.preventDefault();
+        e.preventDefault();
         console.log(e);
         // FIXME - don't use the DOM
         setProject(document.getElementById("projectId").value);
     }
+
+    
+    useEffect(() => {
+        setTimeout( () => {
+        synth.cancel();
+        console.log("Speaking");
+        const welcomeMessage = new SpeechSynthesisUtterance(greeting);
+        //welcomeMessage.voice = synth.getVoices()[8];
+        //welcomeMessage.volume = 0.8;
+        welcomeMessage.volume=1;
+        //synth.cancel()
+        synth.speak(welcomeMessage);
+        console.log(synth.speaking);
+        }, 6000);
+
+        //synth.cancel();
+    })
 
     return (
         <Box sx={{ m: 2, borderRadius: '16px', border:1, boarderColor:'primary.main' }}>
