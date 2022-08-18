@@ -26,25 +26,25 @@ const App = () => {
         setProject(document.getElementById("projectId").value);
     }
 
-    
+
     useEffect(() => {
-        setTimeout( () => {
-        synth.cancel();
-        console.log("Speaking");
-        const welcomeMessage = new SpeechSynthesisUtterance(greeting);
-        //welcomeMessage.voice = synth.getVoices()[8];
-        //welcomeMessage.volume = 0.8;
-        welcomeMessage.volume=1;
-        //synth.cancel()
-        synth.speak(welcomeMessage);
-        console.log(synth.speaking);
+        setTimeout(() => {
+            synth.cancel();
+            console.log("Speaking");
+            const welcomeMessage = new SpeechSynthesisUtterance(greeting);
+            //welcomeMessage.voice = synth.getVoices()[8];
+            //welcomeMessage.volume = 0.8;
+            welcomeMessage.volume = 1;
+            //synth.cancel()
+            synth.speak(welcomeMessage);
+            console.log(synth.speaking);
         }, 6000);
 
         //synth.cancel();
     })
 
     return (
-        <Box sx={{ m: 2, borderRadius: '16px', border:1, boarderColor:'primary.main' }}>
+        <Box sx={{ m: 2, borderRadius: '16px', border: 1, boarderColor: 'primary.main' }}>
             <ThemeProvider theme={darkTheme}>
                 <Grid container spacing={2}>
                     <Grid container spacing={1}>
