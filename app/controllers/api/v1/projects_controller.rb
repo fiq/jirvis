@@ -22,11 +22,12 @@ module Api
       end
 
       def index 
-        @client.Project.find("AV")
+        search_key = params[:id] || "AV"
+        render json: @client.Project.find(search_key)
       end
 
       def show 
-        render json: @client.Project.find("AV")
+        render json: @client.Project.find(params[:id]);
       end
 
 
