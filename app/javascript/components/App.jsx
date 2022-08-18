@@ -14,24 +14,23 @@ const darkTheme = createTheme({ palette: { mode: 'dark' } });
 const App = () => {
     const [project, setProject] = useState("AV");
     const updateProject = (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         setProject(e.target.elements.projectId.value);
     }
 
     return (
-    <Box sx={{ m:2 }}>
-    <ThemeProvider theme={darkTheme}>
+        <Box sx={{ m: 2 }}>
+            <ThemeProvider theme={darkTheme}>
+                <Grid container spacing={2}>
+                    <Grid container spacing={1}>
+                        <TextField required id="projectId" label="Enter Project Key" defaultValue="AV" />
+                        <Button variant="contained" onSubmit={updateProject}></Button>
+                    </Grid>
+                    <Grid item xs={4} md={2}><Jirvis projectId={project} /></Grid>
+                </Grid>
+            </ThemeProvider>
 
-    <Grid content spacing={2}>
-    <Grid container spacing={1}>
-        <TextField required id="projectId" label="Enter Project Key" defaultValue="AV"/>
-        <Button variant="contained" onSubmit={updateProject}></Button>
-    </Grid>            
-    <Grid item xs={4} md={2}><Jirvis project={project}/></Grid>
-    </Grid>
-    </ThemeProvider>
-
-    </Box>
+        </Box>
     );
 };
 

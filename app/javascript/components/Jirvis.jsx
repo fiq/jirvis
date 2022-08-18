@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import WordCapture from "./WordCapture";
+import { Grid } from "@mui/material";
 //import MicIcon from '@mui/icons-material/Mic';
+import Project from "./Project"
 
 
-const Jirvis = () => {
+const Jirvis = (props) => {
     const [capture, setCapture] = useState("<<No words detected>>");
     const SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
     const SpeechGrammarList = window.SpeechGrammarList || webkitSpeechGrammarList;
@@ -25,7 +27,7 @@ const Jirvis = () => {
         event.preventDefault();
         const indexOfCurrentCapture = event.results.length - 1;
         const capturedWords = event.results[indexOfCurrentCapture];
-        setCapture( capturedWords[0].transcript );
+        setCapture(capturedWords[0].transcript);
         console.log("In recognition");
         console.log("Got " + capturedWords[0].transcript);
     };
@@ -36,21 +38,30 @@ const Jirvis = () => {
     };
 
     return (
-        <Box sx={{
-            width: 300,
-            height: 300,
-            backgroundColor: 'primary.dark',
-            '&:hover': {
-              backgroundColor: 'primary.main',
-              opacity: [0.9, 0.8, 0.7],
-            },
-          }}>
-            <b>Please provided a command from {commands.join(", ")}</b>
-            <Button variant="contained" onClick={startRecognition}>Capture Speech</Button>
-            <br />
-            <WordCapture word={capture}/>
-        </Box>
-    )
+        <Grid container spacing={3}>
+            <Grid>
+            <Box sx={{
+                width: 800,
+                height: 400,
+                backgroundColor: 'primary.dark',
+                '&:hover': {
+                    backgroundColor: 'primary.main',
+                    opacity: [0.9, 0.8, 0.7],
+                },
+                m: 4,
+            }}>Please provided a command from {commands.join(", ")}<br/>
+
+                        <Button variant="contained" onClick={startRecognition}>Capture Speech</Button>
+                </Box>
+            </Grid>
+            <Grid>
+                <WordCapture word={capture} />
+            </Grid>
+            <Grid>
+                <Project projectId={props.projectId} />
+            </Grid>
+        </Grid >
+    );
 }
 
 export default Jirvis;
